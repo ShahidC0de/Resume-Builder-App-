@@ -15,10 +15,10 @@ class Apptheme {
       side: BorderSide.none,
     ),
     inputDecorationTheme: InputDecorationTheme(
-      contentPadding: const EdgeInsets.all(20),
+      contentPadding: const EdgeInsets.all(27),
       border: _border(),
       enabledBorder: _border(),
-      focusedBorder: _border(AppPallete.gradient2),
+      focusedBorder: _border(AppPallete.whiteColor),
       errorBorder: _border(AppPallete.errorColor),
     ),
   );

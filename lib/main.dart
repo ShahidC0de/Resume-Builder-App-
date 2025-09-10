@@ -1,8 +1,11 @@
+import 'package:birth_picker/birth_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:resume_builder/core/theme/theme.dart';
 import 'package:resume_builder/resume/presentation/pages/build_resume_1.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await initializeDateFormatting();
   runApp(const MyApp());
 }
 
