@@ -1,5 +1,10 @@
+import 'dart:io';
+
 import 'package:birth_picker/birth_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_intl_phone_field/flutter_intl_phone_field.dart';
+import 'package:flutter_intl_phone_field/phone_number.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:resume_builder/core/theme/app_pallete.dart';
 
 import 'package:resume_builder/core/theme/theme.dart';
@@ -16,10 +21,31 @@ class BasicInfoPage extends StatefulWidget {
 }
 
 class _BasicInfoPageState extends State<BasicInfoPage> {
+  TextEditingController nameController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  DateTime? _selectedDate;
+  XFile? _image;
+  String? _title;
+  String? completePhoneNumber;
+  Future<void> _pickImage() async {
+    final imagePicker = ImagePicker();
+    final pickedImage = await imagePicker.pickImage(
+      source: ImageSource.gallery,
+    );
+    if (pickedImage != null) {
+      setState(() {
+        _image = pickedImage;
+      });
+    }
+  }
+
   final TextEditingController controller = TextEditingController();
   final String hintext = "Name";
   @override
   Widget build(BuildContext context) {
+    final formKey = GlobalKey<FormState>();
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -36,16 +62,24 @@ class _BasicInfoPageState extends State<BasicInfoPage> {
             children: [
               // Profile Photo
               Center(
-                child: CircleAvatar(
-                  radius: 50,
-                  backgroundColor: AppPallete.whiteColor,
-                  child: Text(
-                    'Photo',
-                    style: Apptheme.mediumTextStyle.copyWith(
-                      fontSize: 20,
-                      color: AppPallete.backgroundColor,
-                      fontWeight: FontWeight.bold,
-                    ),
+                child: GestureDetector(
+                  onTap: _pickImage,
+                  child: CircleAvatar(
+                    radius: 50,
+                    backgroundColor: AppPallete.whiteColor,
+                    backgroundImage: _image != null
+                        ? FileImage(File(_image!.path))
+                        : null,
+                    child: _image == null
+                        ? Text(
+                            'Photo',
+                            style: Apptheme.mediumTextStyle.copyWith(
+                              fontSize: 20,
+                              color: AppPallete.backgroundColor,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )
+                        : null,
                   ),
                 ),
               ),
@@ -75,20 +109,66 @@ class _BasicInfoPageState extends State<BasicInfoPage> {
                     const SizedBox(height: 10),
                     TitleSelector(
                       titles: ['Mr.', 'Ms.', 'Mrs.', 'Dr.', 'Prof.'],
-                      onChanged: (value) {},
+                      selectedTitle: _title,
+                      onChanged: (value) {
+                        print(value);
+                        setState(() {
+                          _title = value;
+                        });
+                      },
                     ),
                     const SizedBox(height: 20),
 
-                    Text('First Name', style: Apptheme.mediumTextStyle),
-                    const SizedBox(height: 10),
-                    CustomTextField(controller: controller, label: ''),
+                    SizedBox(
+                      child: Form(
+                        key: formKey,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('Name', style: Apptheme.mediumTextStyle),
+                            const SizedBox(height: 10),
+                            CustomTextField(
+                              controller: nameController,
+                              label: '',
+                            ),
 
-                    const SizedBox(height: 20),
-                    Text('Last Name', style: Apptheme.mediumTextStyle),
-                    const SizedBox(height: 10),
-                    CustomTextField(controller: controller, label: ''),
+                            const SizedBox(height: 20),
+                            Text('Address', style: Apptheme.mediumTextStyle),
+                            const SizedBox(height: 10),
+                            CustomTextField(
+                              controller: addressController,
+                              label: '',
+                            ),
+                            const SizedBox(height: 10),
+                            Text('Email', style: Apptheme.mediumTextStyle),
+                            const SizedBox(height: 10),
+                            CustomTextField(
+                              controller: emailController,
+                              label: '',
+                            ),
 
-                    const SizedBox(height: 20),
+                            const SizedBox(height: 20),
+                            Text('Phone', style: Apptheme.mediumTextStyle),
+                            const SizedBox(height: 10),
+                          ],
+                        ),
+                      ),
+                    ),
+                    IntlPhoneField(
+                      onChanged: (PhoneNumber? value) {
+                        if (value != null) {
+                          setState(() {
+                            completePhoneNumber = value.completeNumber;
+                          });
+                        } else {
+                          completePhoneNumber = null;
+                        }
+                      },
+                      initialCountryCode: 'PK',
+                      controller: phoneController,
+                      decoration: InputDecoration(),
+                    ),
                     Text('Date of Birth', style: Apptheme.mediumTextStyle),
                     const SizedBox(height: 10),
                     BirthPicker(
@@ -105,14 +185,27 @@ class _BasicInfoPageState extends State<BasicInfoPage> {
                       },
                       onChanged: (dateTime) {
                         if (dateTime != null) {
-                          print(dateTime.toIso8601String());
+                          _selectedDate = dateTime;
                         }
                       },
                     ),
                     SizedBox(height: 30),
                     Center(
                       child: ElevatedButton.icon(
-                        onPressed: () {},
+                        onPressed: () {
+                          if (formKey.currentState!.validate() &&
+                              _selectedDate != null &&
+                              _title != null) {
+                            print(nameController.text);
+                            print(addressController.text);
+                            print(emailController.text);
+                            print(phoneController.text);
+                            print(_selectedDate);
+                            print(_title);
+                            print(completePhoneNumber);
+                            // Process data.
+                          }
+                        },
                         label: Icon(
                           Icons.arrow_circle_right,
                           color: AppPallete.whiteColor,
