@@ -8,6 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:resume_builder/core/theme/app_pallete.dart';
 
 import 'package:resume_builder/core/theme/theme.dart';
+import 'package:resume_builder/resume/presentation/pages/education_page.dart';
 import 'package:resume_builder/resume/presentation/widgets/custom_field.dart';
 import 'package:resume_builder/resume/presentation/widgets/title_selector.dart';
 
@@ -89,12 +90,14 @@ class _BasicInfoPageState extends State<BasicInfoPage> {
                 padding: const EdgeInsets.all(16),
                 width: double.infinity,
                 decoration: BoxDecoration(
+                  // ignore: deprecated_member_use
                   color: AppPallete.backgroundColor.withOpacity(
                     0.9,
                   ), // light card
                   borderRadius: BorderRadius.circular(12),
                   boxShadow: [
                     BoxShadow(
+                      // ignore: deprecated_member_use
                       color: AppPallete.greyColor.withOpacity(0.3),
                       spreadRadius: 2,
                       blurRadius: 8,
@@ -204,6 +207,7 @@ class _BasicInfoPageState extends State<BasicInfoPage> {
                             print(_title);
                             print(completePhoneNumber);
                             // Process data.
+                            Navigator.of(context).push(EducationPage.route());
                           }
                         },
                         label: Icon(

@@ -1,0 +1,118 @@
+final List<String> educationLevels = [
+  'High School / Secondary',
+  'Associate Degree',
+  'Bachelor’s Degree',
+  'Master’s Degree',
+  'Doctorate (PhD)',
+  'Other',
+];
+final List<String> courses = [
+  // Computer Science & IT
+  "Computer Science",
+  "Information Technology",
+  "Software Engineering",
+  "Data Science",
+  "Artificial Intelligence",
+  "Cybersecurity",
+  "Computer Engineering",
+  "Cloud Computing",
+  "Networking",
+  "Web Development",
+  "Mobile App Development",
+
+  // Business & Management
+  "Business Administration",
+  "Management Studies",
+  "Finance",
+  "Accounting",
+  "Marketing",
+  "Human Resource Management",
+  "Supply Chain Management",
+  "Entrepreneurship",
+  "Economics",
+  "International Business",
+
+  // Engineering & Technology
+  "Civil Engineering",
+  "Mechanical Engineering",
+  "Electrical Engineering",
+  "Electronics & Communication Engineering",
+  "Chemical Engineering",
+  "Petroleum Engineering",
+  "Aerospace Engineering",
+  "Biomedical Engineering",
+  "Industrial Engineering",
+  "Robotics Engineering",
+
+  // Medicine & Health Sciences
+  "Medicine (MBBS/MD)",
+  "Nursing",
+  "Pharmacy",
+  "Dentistry",
+  "Physiotherapy",
+  "Public Health",
+  "Biomedical Sciences",
+  "Veterinary Medicine",
+  "Nutrition & Dietetics",
+  "Psychology",
+
+  // Arts, Humanities & Social Sciences
+  "English Literature",
+  "History",
+  "Philosophy",
+  "Political Science",
+  "Sociology",
+  "Anthropology",
+  "International Relations",
+  "Journalism & Mass Communication",
+  "Education / Teaching",
+  "Fine Arts / Visual Arts",
+  "Music / Performing Arts",
+
+  // Science & Mathematics
+  "Physics",
+  "Chemistry",
+  "Biology",
+  "Mathematics",
+  "Statistics",
+  "Environmental Science",
+  "Geology",
+  "Biotechnology",
+  "Microbiology",
+  "Astronomy",
+
+  // Law & Governance
+  "Law (LLB / JD)",
+  "Criminology",
+  "Public Administration",
+  "Political Law",
+  "International Law",
+
+  // Vocational / Professional
+  "Graphic Design",
+  "Animation / Multimedia",
+  "Fashion Design",
+  "Culinary Arts",
+  "Hotel & Tourism Management",
+  "Digital Marketing",
+  "Photography",
+  "Film & Media Studies",
+  "Interior Design",
+  "Architecture",
+  "Not In the List",
+];
+List<String> months = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
+List<String> years = List.generate(100, (index) => (2023 - index).toString());

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:resume_builder/core/theme/theme.dart';
 import 'package:resume_builder/resume/presentation/pages/basic_info_page.dart';
+import 'package:resume_builder/resume/presentation/pages/education_page.dart';
 import 'package:resume_builder/resume/presentation/widgets/custom_grid.dart';
 
 class BuildResume extends StatefulWidget {
